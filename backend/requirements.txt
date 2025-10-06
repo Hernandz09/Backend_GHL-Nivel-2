@@ -1,0 +1,17 @@
+# Core Django
+Django==5.2.6
+djangorestframework==3.16.1
+django-cors-headers==4.7.0
+django-environ==0.12.0
+
+# HTTP requests
+requests==2.32.4
+
+# Environment management
+python-dotenv==1.1.0
+
+# Production server
+gunicorn==23.0.0
+whitenoise==6.8.2
+
+# SQLite is included with Python - no additional dependencies needed

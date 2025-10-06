@@ -1,0 +1,291 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+		"name": "GHL Contactos + Citas API",
+		"description": "Colección completa para probar la integración de Contactos y Citas con GHL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Contactos",
+			"item": [
+				{
+					"name": "Crear Contacto Nuevo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Ronald\",\n    \"lastName\": \"Torres\",\n    \"email\": \"Ronald.torres@email.com\",\n    \"phone\": \"+51918918147\",\n    \"source\": \"Postman\",\n    \"locationId\": \"CRlTCqv7ASS9xOpPQ59O\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/contacts/create/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"contacts",
+								"create",
+								""
+							]
+						},
+						"description": "Crear un contacto ficticio nuevo en GHL y guardarlo en la base de datos local"
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Contactos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/contacts/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"contacts",
+								""
+							]
+						},
+						"description": "Obtener todos los contactos creados en la base de datos local"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints para gestión de contactos"
+		},
+		{
+			"name": "2. Citas",
+			"item": [
+				{
+					"name": "Crear Cita",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"calendarId\": \"2fgVoaRLnypQzl83H5gf\",\n    \"contactId\": \"MfGsfig9eluEgIML9Huw\",\n    \"locationId\": \"CRlTCqv7ASS9xOpPQ59O\",\n    \"assignedUserId\": \"lFqIyq3yCE6mZxNwIcID\",\n    \"title\": \"Urgente\",\n    \"startTime\": \"2025-10-06T10:00:00Z\",\n    \"endTime\": \"2025-10-06T11:00:00Z\",\n    \"appointmentStatus\": \"confirmed\",\n    \"notes\": \"Cita creada desde Postman\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/appointments/create/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"appointments",
+								"create",
+								""
+							]
+						},
+						"description": "Crear una cita ligada a un contacto existente en GHL"
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Citas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/appointments/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"appointments",
+								""
+							]
+						},
+						"description": "Obtener todas las citas creadas en la base de datos local"
+					},
+					"response": []
+				},
+				{
+					"name": "Reprogramar Cita",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Cita Reprogramada - Postman\",\n    \"startTime\": \"2025-10-08T14:00:00-05:00\",\n    \"endTime\": \"2025-10-08T15:00:00-05:00\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/appointments/{{appointment_id}}/update/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"appointments",
+								"{{appointment_id}}",
+								"update",
+								""
+							]
+						},
+						"description": "Reprogramar una cita existente. Reemplaza {{appointment_id}} con el ID real de la cita"
+					},
+					"response": []
+				},
+				{
+					"name": "Cancelar Cita",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/appointments/{{appointment_id}}/delete/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"appointments",
+								"{{appointment_id}}",
+								"delete",
+								""
+							]
+						},
+						"description": "Cancelar una cita existente. Reemplaza {{appointment_id}} con el ID real de la cita"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints para gestión de citas"
+		},
+		{
+			"name": "3. Flujo Completo - Ejemplo",
+			"item": [
+				{
+					"name": "Paso 1: Crear Contacto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"María\",\n    \"lastName\": \"González\",\n    \"email\": \"maria.gonzalez.ejemplo@email.com\",\n    \"phone\": \"+51918918148\",\n    \"source\": \"Ejemplo\",\n    \"locationId\": \"CRlTCqv7ASS9xOpPQ59O\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/contacts/create/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"contacts",
+								"create",
+								""
+							]
+						},
+						"description": "Paso 1: Crear un contacto nuevo para el ejemplo"
+					},
+					"response": []
+				},
+				{
+					"name": "Paso 2: Crear Cita con Contacto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"calendarId\": \"2fgVoaRLnypQzl83H5gf\",\n    \"contactId\": \"{{contact_id}}\",\n    \"locationId\": \"CRlTCqv7ASS9xOpPQ59O\",\n    \"assignedUserId\": \"lFqIyq3yCE6mZxNwIcID\",\n    \"title\": \"Consulta de Ejemplo\",\n    \"startTime\": \"2025-10-07T09:00:00Z\",\n    \"endTime\": \"2025-10-07T10:00:00Z\",\n    \"appointmentStatus\": \"confirmed\",\n    \"notes\": \"Cita de ejemplo creada desde Postman\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/appointments/create/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"appointments",
+								"create",
+								""
+							]
+						},
+						"description": "Paso 2: Crear una cita usando el contactId del paso anterior"
+					},
+					"response": []
+				}
+			],
+			"description": "Ejemplo del flujo completo: Contacto + Cita"
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000/api",
+			"type": "string"
+		},
+		{
+			"key": "location_id",
+			"value": "CRlTCqv7ASS9xOpPQ59O",
+			"type": "string"
+		},
+		{
+			"key": "calendar_id",
+			"value": "2fgVoaRLnypQzl83H5gf",
+			"type": "string"
+		},
+		{
+			"key": "assigned_user_id",
+			"value": "lFqIyq3yCE6mZxNwIcID",
+			"type": "string"
+		},
+		{
+			"key": "contact_id",
+			"value": "MfGsfig9eluEgIML9Huw",
+			"type": "string",
+			"description": "Reemplaza con el ID real del contacto creado"
+		},
+		{
+			"key": "appointment_id",
+			"value": "ID_DE_LA_CITA",
+			"type": "string",
+			"description": "Reemplaza con el ID real de la cita a actualizar/cancelar"
+		}
+	]
+}
