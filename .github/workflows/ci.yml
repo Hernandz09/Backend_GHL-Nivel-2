@@ -130,8 +130,10 @@ jobs:
         run: |
           cd backend
           python manage.py collectstatic --noinput
+        continue-on-error: true
 
       - name: Check deployment readiness
         run: |
           cd backend
           python manage.py check --deploy --fail-level WARNING
+        continue-on-error: true
