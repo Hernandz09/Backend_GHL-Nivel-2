@@ -1,0 +1,25 @@
+[tool.black]
+line-length = 127
+target-version = ['py310', 'py311', 'py312']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.venv
+  | \.env
+  | venv
+  | env
+  | __pycache__
+  | migrations
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 127
+skip = ["migrations", "venv", "env", ".venv", ".env"]
+known_django = ["django"]
+known_first_party = ["mi_proyecto", "appointments"]
+sections = ["FUTURE", "STDLIB", "DJANGO", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
